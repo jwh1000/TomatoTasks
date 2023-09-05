@@ -55,6 +55,7 @@ function switchMode(mode) {
     updateClock();
 }
 
+
 /**
  * When a button is clicked, switch modes to that button's associated
  * mode.
