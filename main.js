@@ -33,6 +33,11 @@ function updateClock() {
 }
 
 
+/**
+ * Changes the current mode the clock has been set to (pomodoro, long break,
+ * short break)
+ * @param {string} mode mode to switch the clock to
+ */
 function switchMode(mode) {
     timer.mode = mode;
     timer.remainingTime = {
@@ -50,7 +55,12 @@ function switchMode(mode) {
     updateClock();
 }
 
-
+/**
+ * When a button is clicked, switch modes to that button's associated
+ * mode.
+ * @param {Event} event 
+ * @returns nothing
+ */
 function handleMode(event) {
     const {mode} = event.target.dataset;
 
