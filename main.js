@@ -2,7 +2,7 @@
  * Timer variable stores the times needed for each pomodoro and break length
  */
 const timer = {
-    pomodor: 25,
+    pomodoro: 25,
     shortBreak: 5,
     longBreak: 15,
     longBreakInterval: 4,
@@ -23,8 +23,8 @@ modeButtons.addEventListener('click', handleMode);
  */
 function updateClock() {
     const {remainingTime} = timer;
-    const minutes = '${remainingTime.minutes}'.padStart(2, '0');
-    const seconds = '${remainingTime.seconds}'.padStart(2, '0');
+    const minutes = `${remainingTime.minutes}`.padStart(2, '0');
+    const seconds = `${remainingTime.seconds}`.padStart(2, '0');
 
     const min = document.getElementById('js-minutes');
     const sec = document.getElementById('js-seconds');
@@ -44,8 +44,8 @@ function switchMode(mode) {
     document
         .querySelectorAll('button[data-mode]')
         .forEach(e => e.classList.remove('active'));
-    document.querySelector('[data-mode="$[mode]"').classList.add('active');
-    document.body.style.backgroundColor = 'var(--${mode})';
+    document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+    document.body.style.backgroundColor = `var(--${mode})`;
 
     updateClock();
 }
