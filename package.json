@@ -15,5 +15,9 @@
     "pomodoro",
     "timer",
     "javascript"
-  ]
+  ],
+  "dependencies": {
+    "@doist/todoist-api-typescript": "^2.1.2",
+    "node-fetch": "^3.3.2"
+  }
 }
