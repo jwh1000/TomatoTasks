@@ -24,7 +24,7 @@ Http.onreadystatechange = (e) => {
  * Timer variable stores the times needed for each pomodoro and break length
  */
 const timer = {
-    pomodoro: 1,
+    pomodoro: 25,
     shortBreak: 5,
     longBreak: 15,
     longBreakInterval: 4,
