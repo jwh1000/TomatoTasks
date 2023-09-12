@@ -5,11 +5,11 @@
 import apiKey from './api-key.json' assert { type: 'json' };
 
 const Http = new XMLHttpRequest();
-const url=' https://api.todoist.com/rest/v2/projects';
+const url=' https://api.todoist.com/rest/v2/tasks';
 
-fetch(url, {
+fetch(url + '?filter=p1', {
    headers: {
-      'Authorization': 'Bearer ' + apiKey.key
+      'Authorization': 'Bearer ' + apiKey.key,
    }
 })
    .then(response => response.text())
@@ -33,6 +33,7 @@ const timer = {
 
 let interval; // inverval used to count down each second
 
+let tasks = [];
 
 /**
  * initialization; grabs the buttons from HTML and adds an event listener for 
@@ -49,6 +50,7 @@ mainButton.addEventListener('click', () => {
         stopTimer();
     }
 });
+
 
 const modeButtons = document.querySelector('#js-mode-buttons');
 modeButtons.addEventListener('click', handleMode);
@@ -69,6 +71,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     switchMode('pomodoro');
 })
+
+const form = document.querySelector('.js-form');
+form.addEventListener('submit', event => {
+    event.preventDefault();
+    const input = document.querySelector('.js-todo-input');
+    const text = input.value.trim();
+    if (text !== '') {
+        addTodo(text);
+        input.value = '';
+        input.focus();
+    }
+})
+
+
+/**
+ * Temporarily stubbed out
+ * 
+ * @param {string} text the todo's title 
+ * @returns 
+ */
+function addTodo(text) {
+    return;
+}
 
 
 /**
