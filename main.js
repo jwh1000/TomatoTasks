@@ -1,19 +1,23 @@
 /**
  * author: Jack Hunsberger
- * PomoTimer is a simple pomodoro timer app to help with studying and focus
+ * TomatoTasks is a simple pomodoro timer and task management app to help with studying and focus
  */
 import apiKey from './api-key.json' assert { type: 'json' };
 
 const Http = new XMLHttpRequest();
 const url=' https://api.todoist.com/rest/v2/tasks';
 
+let tasks = [];
 fetch(url + '?filter=p1', {
    headers: {
       'Authorization': 'Bearer ' + apiKey.key,
    }
 })
-   .then(response => response.text())
-   .then(text => console.log(text))
+   .then(response => response.json())
+   .then(data => {
+        tasks = data;
+        console.log(tasks);
+   });
 
 Http.onreadystatechange = (e) => {
     console.log(Http.responseText)
@@ -32,8 +36,6 @@ const timer = {
 };
 
 let interval; // inverval used to count down each second
-
-let tasks = [];
 
 /**
  * initialization; grabs the buttons from HTML and adds an event listener for 
@@ -83,6 +85,25 @@ form.addEventListener('submit', event => {
         input.focus();
     }
 })
+
+
+function renderTodo(todo) {
+    const list = document.querySelector('.js-todo-list');
+    const isChecked = todo.checked ? 'done' : '';
+
+    const node = document.createElement("li");
+    node.setAttribute('class', `todo-item ${isChecked}`);
+    node.setAttribute('data-key', todo.id)
+    
+    node.innerHTML = `
+    <input id="${todo.id}" type="checkbox"/>
+    <label for="${todo.id}" class="tick js-tick"></label>
+    <span>${todo.text}</span>
+    <button class="delete-todo js-delete-todo">
+    <svg><use href="#delete-icon"></use></svg>
+    </button>
+    `;
+}
 
 
 /**
